@@ -28,9 +28,11 @@
       </div>
     </div>
 
-    <form id="create" onsubmit="myFunction()">
-      Enter contract address: <input type="text">
-      <input type="submit">
+    <form id="create">
+      <p>Enter bet size: <input id="bet-size" type="text"></p>
+      <p>Enter price you believe eth will be over or equal to at your deadline: <input id="eth-price" type="text"></p>
+      <p>Enter timestamp for deadline in unix seconds (use: https://www.epochconverter.com/): <input id="timestamp" type="text"></p>
+      <input id="submit-create" type="submit">
     </form>
 
     <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>

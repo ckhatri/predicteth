@@ -5,8 +5,13 @@ App = {
   init: async function() {
     // Load pets
 
-    var create = $('#create');
-    $(create).submit(console.log('hello'));
+    $('#create').on('submit', function(e){
+      // validation code here
+      App.betSize = $('#bet-size').val();
+      App.price = $('eth-price').val();
+      App.timestamp = $('timestamp').val();
+      e.preventDefault();
+    });
 
     return await App.initWeb3();
   },
@@ -33,10 +38,10 @@ App = {
     }
     web3 = new Web3(App.web3Provider);
 
-    return App.initContract();
+    return App.initCreateContract();
   },
 
-  initContract: function() {
+  initCreateContract: function() {
     $.getJSON('BetPredictorCreator.json', function(data) {
       console.log(data);
       // Get the necessary contract artifact file and instantiate it with truffle-contract
@@ -50,14 +55,14 @@ App = {
       // Use our contract to retrieve and mark the adopted pets
       console.log('hi there');
       console.log(App.contracts.BetPredictorCreator);
-      return App.test();
     });
 
     return App.bindEvents();
   },
 
+
   bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    $(document).on('click', '#submit-create', App.handleAdopt);
   },
 
   test: function() {
@@ -71,10 +76,6 @@ App = {
   handleAdopt: function(event) {
     event.preventDefault();
 
-    var petId = parseInt($(event.target).data('id'));
-
-    var adoptionInstance;
-
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
         console.log(error);
@@ -87,12 +88,13 @@ App = {
       App.contracts.BetPredictorCreator.deployed().then((instance) => {
         console.log('sup');
         console.log(instance);
-        instance.createBet(10, 10, 10, { from: account }).then((tx) => {
-          console.log(tx);
-          instance.getAddresses.call().then((result) => {
-            console.log(result);
-          })
-          return tx;
+        console.log(App);
+        instance.createBet.call(10, 10, 10, { from: account }).then((addr) => {
+          const addrCreated = addr;
+          instance.createBet(10, 10, 10, { from: account }).then(() => {
+            console.log(addrCreated);
+            alert('congrats your smart contract was created at address: ' + addrCreated);
+          });
         });
       });
 
