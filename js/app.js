@@ -51,7 +51,7 @@ App = {
     console.log(BetPredictorCreatorContract)
 
     var BetPredictorCreator = BetPredictorCreatorContract.at('0x5a77ff100d514b00b9b24bbc1c99c0da45ac73aa');
-    console.log(betPredictorCreator);
+    console.log(BetPredictorCreator);
 
     // $.getJSON('build/contracts/BetPredictorCreator.json', function(data) {
     //   console.log(data);
