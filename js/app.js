@@ -43,20 +43,30 @@ App = {
 
   initCreateContract: function() {
     console.log('INIT!!');
-    $.getJSON('build/contracts/BetPredictorCreator.json', function(data) {
-      console.log(data);
-      // Get the necessary contract artifact file and instantiate it with truffle-contract
-      var BetPredictorCreatorArtifact = data;
-      console.log(BetPredictorCreatorArtifact);
-      App.contracts.BetPredictorCreator = TruffleContract(BetPredictorCreatorArtifact);
+    var BetPredictorCreatorContract = web3.eth.contract(
+      [{"constant":false,"inputs":[{"name":"_myid","type":"bytes32"},{"name":"_result","type":"string"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deadline","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_myid","type":"bytes32"},{"name":"_result","type":"string"},{"name":"_proof","type":"bytes"}],"name":"__callback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ownerAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"ownerBet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"deadlinePrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ownerBetConfirmed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"betPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"betAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"opponentBetConfirmed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"opponentAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"deadlinePriceRetrieved","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"becomeOpponent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"hasPaymentHappened","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_betPrice","type":"uint256"},{"name":"_betAmount","type":"uint256"},{"name":"_deadline","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"nextStep","type":"string"}],"name":"LogConstructorInitiated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"price","type":"string"}],"name":"LogPriceUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"description","type":"string"}],"name":"LogNewOraclizeQuery","type":"event"}]
 
-      // Set the provider for our contract
-      App.contracts.BetPredictorCreator.setProvider(App.web3Provider);
+    );
 
-      // Use our contract to retrieve and mark the adopted pets
-      console.log('hi there');
-      console.log(App.contracts.BetPredictorCreator);
-    });
+    console.log(BetPredictorCreatorContract)
+
+    var BetPredictorCreator = BetPredictorCreatorContract.at('0x5a77ff100d514b00b9b24bbc1c99c0da45ac73aa');
+    console.log(betPredictorCreator);
+
+    // $.getJSON('build/contracts/BetPredictorCreator.json', function(data) {
+    //   console.log(data);
+    //   // Get the necessary contract artifact file and instantiate it with truffle-contract
+    //   var BetPredictorCreatorArtifact = data;
+    //   console.log(BetPredictorCreatorArtifact);
+    //   App.contracts.BetPredictorCreator = TruffleContract(BetPredictorCreatorArtifact);
+    //
+    //   // Set the provider for our contract
+    //   App.contracts.BetPredictorCreator.setProvider(App.web3Provider);
+    //
+    //   // Use our contract to retrieve and mark the adopted pets
+    //   console.log('hi there');
+    //   console.log(App.contracts.BetPredictorCreator);
+    // });
 
     return App.bindEvents();
   },
