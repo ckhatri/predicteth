@@ -28,16 +28,40 @@
       </div>
     </div>
 
-    <form id="create">
+    <div>
+      <p>
+        Hello, if you'd like to utilize the smart contracts for peer to peer betting go here:
+        for the smart contracts: https://github.com/ckhatri/predicteth/tree/master/contracts
+      </p>
+      <p>
+        You can download these files to your local computer (You do not need the migrations file).
+      </p>
+      <p>
+        next go to https://remix.ethereum.org and then upload all of those files. Compile.
+        Deploy to whichever network you want to, test or live.
+      </p>
+      <p>
+        For the time stamp you can use: https://www.epochconverter.com/
+      </p>
+      <p>
+        Bet price is the price you believe ethereum will be above at the deadline.
+      </p>
+      <p>
+        Bet amount is the amount you want to bet, note that this number is / 1000 ether so if you want to be 1 ether you'd write 1000 here (this has to do with solidity not doing decimals or floating point). So if you enter 1 you'd be betting 0.001 ether.
+      </p>
+      <p>
+        Have fun!
+      </p>
+    </div>
+
+    <!-- <form id="create">
       <div class="form-group">
       <p>Enter bet size divided by 1000, ex. if you want to bet 1 eth you should do 1000: <input id="bet-size" class="form-control" type="text"></p>
       <p>Enter price you believe eth will be over or equal to at your deadline: <input id="eth-price" type="text" class="form-control" >
       <p>Enter timestamp for deadline in unix seconds (use: https://www.epochconverter.com/): <input id="timestamp class="form-control"" type="text"></p>
       </div>
       <button id="submit-create" type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-    <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
+    </form> -->
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
