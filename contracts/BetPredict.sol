@@ -9,7 +9,6 @@ contract BetPredict is usingOraclize {
   uint256 public betPrice;
   uint256 public deadlinePrice;
   uint256 public betAmount;
-  uint256 public priceLimit;
   uint256 public deadline;
 
   address payable public ownerAddress;
@@ -26,7 +25,7 @@ contract BetPredict is usingOraclize {
 
   constructor( uint256 _betPrice, uint256 _betAmount, uint256 _deadline) public {
 		betPrice = _betPrice;
-    betAmount = _betAmount;
+    betAmount = _betAmount * .001 ether;
     deadline = _deadline;
 
     ownerAddress = msg.sender;
@@ -62,8 +61,6 @@ contract BetPredict is usingOraclize {
 	}
 
   function withdraw() public {
-		require(getTime() > deadline);
-    require(!hasPaymentHappened);
     if (deadlinePriceRetrieved) {
       require(getTime() > deadline);
       require(!hasPaymentHappened);
@@ -76,10 +73,10 @@ contract BetPredict is usingOraclize {
       hasPaymentHappened = true;
     } else {
       if (msg.sender == address(ownerAddress)) {
-        ownerAddress.transfer(betPrice);
+        ownerAddress.transfer(betAmount);
         ownerBetConfirmed = false;
       } else if (msg.sender == address(opponentAddress)) {
-        opponentAddress.transfer(betPrice);
+        opponentAddress.transfer(betAmount);
         opponentBetConfirmed = false;
       }
     }
@@ -92,7 +89,12 @@ contract BetPredict is usingOraclize {
         emit LogPriceUpdated(result);
     }
 
-  function _updatePrice() private {
-        deadlinePrice = 0;
+    function _updatePrice() private {
+          if (oraclize_getPrice("URL") > address(this).balance) {
+              emit LogNewOraclizeQuery("Provable query was NOT sent, please add some ETH to cover for the query fee");
+          } else {
+              emit LogNewOraclizeQuery("Provable query was sent, standing by for the answer..");
+              oraclize_query(deadline, "URL", "json(https://api.pro.coinbase.com/products/ETH-USD/ticker).price");
+          }
     }
 }

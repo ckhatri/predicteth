@@ -4,8 +4,6 @@ import "./BetPredict.sol";
 
 contract BetPredictorCreator {
 
-  string public test = "hello";
-
   function createBet(uint256 betPrice, uint256 betAmount, uint256 deadline)
      public
      returns (address contractAddress)

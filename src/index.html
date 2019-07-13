@@ -29,31 +29,16 @@
     </div>
 
     <form id="create">
-      <p>Enter bet size: <input id="bet-size" type="text"></p>
-      <p>Enter price you believe eth will be over or equal to at your deadline: <input id="eth-price" type="text"></p>
-      <p>Enter timestamp for deadline in unix seconds (use: https://www.epochconverter.com/): <input id="timestamp" type="text"></p>
-      <input id="submit-create" type="submit">
+      <div class="form-group">
+      <p>Enter bet size divided by 1000, ex. if you want to bet 1 eth you should do 1000: <input id="bet-size" class="form-control" type="text"></p>
+      <p>Enter price you believe eth will be over or equal to at your deadline: <input id="eth-price" type="text" class="form-control" >
+      <p>Enter timestamp for deadline in unix seconds (use: https://www.epochconverter.com/): <input id="timestamp class="form-control"" type="text"></p>
+      </div>
+      <button id="submit-create" type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
 
-    <!-- <div id="petTemplate" style="display: none;">
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
-          <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
-            <br/><br/>
-            <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
-            <strong>Age</strong>: <span class="pet-age">3</span><br/>
-            <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
-            <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
