@@ -42,6 +42,7 @@ App = {
   },
 
   initCreateContract: function() {
+    console.log('INIT!!');
     $.getJSON('build/contracts/BetPredictorCreator.json', function(data) {
       console.log(data);
       // Get the necessary contract artifact file and instantiate it with truffle-contract
