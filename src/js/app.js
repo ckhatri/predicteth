@@ -84,8 +84,16 @@ App = {
 
       console.log(account)
 
-      App.contracts.BetPredictorCreator.deployed().then(() => {
+      App.contracts.BetPredictorCreator.deployed().then((instance) => {
         console.log('sup');
+        console.log(instance);
+        instance.createBet(10, 10, 10, { from: account }).then((tx) => {
+          console.log(tx);
+          instance.getAddresses.call().then((result) => {
+            console.log(result);
+          })
+          return tx;
+        });
       });
 
       // App.contracts.Adoption.deployed().then(function(instance) {
